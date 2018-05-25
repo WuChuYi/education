@@ -29,6 +29,8 @@ class Course(models.Model):
     type = models.CharField(max_length=20, null=True, blank=True, default=None)
     need_computer =  models.CharField(max_length=10, null=True, blank=True, default=None)
     period = models.IntegerField()
+    exam_method = models.CharField(max_length=10, null=True, blank=True, default=None)A
+    description = models.CharField(max_length=50, null=True, blank=True, default=None)
 
 class Edu_manager(models.Model):
     Mana_ID = models.CharField(max_length=20, default=None, primary_key=True)

@@ -1,6 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.utils import timezone
+
+# Create your models here.
 
 class Student(models.Model):
     stu_ID = models.CharField(max_length=20, default=None, primary_key=True)
@@ -28,7 +28,7 @@ class Course(models.Model):
     type = models.CharField(max_length=20, null=True, blank=True, default=None)
     need_computer =  models.CharField(max_length=10, null=True, blank=True, default=None)
     period = models.IntegerField()
-    exam_method = models.CharField(max_length=10, null=True, blank=True, default=None)A
+    exam_method = models.CharField(max_length=10, null=True, blank=True, default=None)
     description = models.CharField(max_length=50, null=True, blank=True, default=None)
 
 class Edu_manager(models.Model):

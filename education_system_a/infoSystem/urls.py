@@ -5,5 +5,7 @@ from . import views
 app_name = 'infoSystem'
 
 urlpatterns = [
-    path('', views.login, name='login'),
+    path('login/', views.login, name='login'),
+    path('',views.kcb, name='kcb'),
+    path('personal/',views.personal, name='personal'),
 ]

@@ -1,0 +1,97 @@
+{% extends 'Home.html' %}
+{% load static %}
+
+{% block title %}
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            {% for tab in tabs %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ tab.href }}">
+                    <span data-feather="{{ tab.icon }}"></span>
+                    {{ tab.name }}
+                </a>
+            </li>
+            {% endfor %}
+            <div class="dropdown-divider"></div>
+            {% for fun in functions %}
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>{{ fun.name }}</span>
+                <a class="d-flex align-items-center text-muted" href="#">
+                    <span data-feather="chevron-right"></span>
+                </a>
+            </h6>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+{% block main %}
+<table class="table table-bordered text-center">
+    <thead>
+    <tr style="background-color: rgba(21,212,45,.1)">
+        <th scope="col" style="width: 10%">#</th>
+        <th scope="col" style="width: 10%">周一</th>
+        <th scope="col" style="width: 10%">周二</th>
+        <th scope="col" style="width: 10%">周三</th>
+        <th scope="col" style="width: 10%">周四</th>
+        <th scope="col" style="width: 10%">周五</th>
+        <th scope="col" style="width: 10%">周六</th>
+        <th scope="col" style="width: 10%">周日</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row" style="background-color: rgba(21,212,45,.1)">上午-1</th>
+        <th scope="col" style="background-color: #4b8542;color: white;">高数</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col" style="background-color: #4b8542;color: white;">大英</th>
+        <th scope="col" style="background-color: #4b8542;color: white;">马原</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    <tr>
+        <th scope="row" style="background-color: rgba(21,212,45,.1)">上午-2</th>
+        <th scope="col" style="background-color: #4b8542;color: white;">高数</th>
+        <th scope="col" style="background-color: #4b8542;color: white;">高数</th>
+        <th scope="col"></th>
+        <th scope="col" style="background-color: #4b8542;color: white;">大英</th>
+        <th scope="col" style="background-color: #4b8542;color: white;">马原</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    <tr>
+        <th scope="row" style="background-color: rgba(21,212,45,.1)">下午-1</th>
+        <th scope="col" style="background-color: #4b8542;color: white;">C程</th>
+        <th scope="col"></th>
+        <th scope="col" style="background-color: #4b8542;color: white;">软工</th>
+        <th scope="col" style="background-color: #4b8542;color: white;">大物</th>
+        <th scope="col" style="background-color: #4b8542;color: white;">大物</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    <tr>
+        <th scope="row" style="background-color: rgba(21,212,45,.1)">下午-2</th>
+        <th scope="col" style="background-color: #4b8542;color: white;">C程</th>
+        <th scope="col"></th>
+        <th scope="col" style="background-color: #4b8542;color: white;">大物</th>
+        <th scope="col" style="background-color: #4b8542;color: white;">软工</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    <tr>
+        <th scope="row" style="background-color: rgba(21,212,45,.1)">晚上-1</th>
+        <th scope="col"></th>
+        <th scope="col" style="background-color: #4b8542;color: white;">视觉奥秘</th>
+        <th scope="col"></th>
+        <th scope="col" style="background-color: #4b8542;color: white;">茶学与健康</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </tbody>
+</table>
+{% endblock %}

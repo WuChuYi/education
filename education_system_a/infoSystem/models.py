@@ -10,7 +10,7 @@ class Student(models.Model):
     major_ID = models.CharField(max_length=20, null=True, blank=True, default=None)
     stu_password = models.CharField(max_length=20, null=True, blank=True, default="123456")
     tot_cred = models.DecimalField(max_digits=20, decimal_places=1)
-    avatar = models.ImageField(upload_to='course/cover-img/', default=None, null=True)
+    avatar = models.ImageField(upload_to='temp/cover-img/', default=None, null=True)
 
 class Instructor(models.Model):
     ins_ID = models.CharField(max_length=20, default=None, primary_key=True)

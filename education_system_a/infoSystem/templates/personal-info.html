@@ -1,0 +1,77 @@
+{% extends 'Home.html' %}
+{% load static %}
+
+{% block title %}
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            {% for tab in tabs %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ tab.href }}">
+                    <span data-feather="{{ tab.icon }}"></span>
+                    {{ tab.name }}
+                </a>
+            </li>
+            {% endfor %}
+            <div class="dropdown-divider"></div>
+            {% for fun in functions %}
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>{{ fun.name }}</span>
+                <a class="d-flex align-items-center text-muted" href="#">
+                    <span data-feather="chevron-right"></span>
+                </a>
+            </h6>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+
+{% block main %}
+<div style="display: flex">
+    <img src="{{ student.avatar.url }}" class="img-thumbnail">
+    <form style="margin-left: 5rem;margin-top: 5rem">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="name">姓名</span>
+            </div>
+            <input type="text" class="form-control"  value="{{ student.stu_name }}" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="gender">性别</span>
+            </div>
+            <input type="text" class="form-control"  value="{{ student.stu_gender }}" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="code">密码</span>
+            </div>
+            <input type="text" class="form-control"  value="{{ student.stu_password }}" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <button type="submit" class="btn btn-outline-success float-right">保存修改</button>
+    </form>
+</div>
+<h2 style="margin: 5rem 0 2rem 0">More Message</h2>
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Grade</th>
+            <th>Major ID</th>
+            <th>Total Cred</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ student.stu_ID }}</td>
+            <td>{{ student.stu_grade }}</td>
+            <td>{{ student.major_ID }}</td>
+            <td>{{ student.tot_cred }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

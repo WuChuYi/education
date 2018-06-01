@@ -47,3 +47,4 @@ class Sys_manager(models.Model):
 class Ins_course(models.Model):
     Ins_ID = models.ForeignKey('Instructor', on_delete=models.SET_NULL, null=True)
     Course_ID = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
+

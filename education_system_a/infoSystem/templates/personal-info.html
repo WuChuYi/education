@@ -21,7 +21,7 @@
             {% for fun in functions %}
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                 <span>{{ fun.name }}</span>
-                <a class="d-flex align-items-center text-muted" href="{% url 'infoSystem: fun.href' %}">
+                <a class="d-flex align-items-center text-muted" href="{{ fun.href }}">
                     <span data-feather="chevron-right"></span>
                 </a>
             </h6>

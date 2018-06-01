@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime
 # Create your models here.
 
 class Student(models.Model):
@@ -51,4 +51,4 @@ class Ins_course(models.Model):
 class Blacklist(models.Model):
     User_ID = models.CharField(max_length=20, default=None, primary_key=True)
     Error_time = models.IntegerField()
-    Lock_out = models.DateTimeField(default=datetime.now().replace(tzinfo=utc))
+    Lock_out = models.DateTimeField(default=datetime.now())

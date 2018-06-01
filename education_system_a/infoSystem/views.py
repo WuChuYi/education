@@ -3,7 +3,6 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Student,Instructor,Course
 from django.http import HttpResponseRedirect
 from .db_manage import update_student, update_instructor, update_course
-from .import import import_record
 # Create your views here.
 
 @csrf_exempt

@@ -1,6 +1,10 @@
 {% extends 'Home.html' %}
 {% load static %}
 
+{% block personal %}
+<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">{{ user.stu_name }}</a>
+{% endblock %}
+
 {% block title %}
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
     <div class="sidebar-sticky">
@@ -17,7 +21,7 @@
             {% for fun in functions %}
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                 <span>{{ fun.name }}</span>
-                <a class="d-flex align-items-center text-muted" href="#">
+                <a class="d-flex align-items-center text-muted" href="{% url 'infoSystem: fun.href' %}">
                     <span data-feather="chevron-right"></span>
                 </a>
             </h6>
@@ -29,26 +33,29 @@
 
 
 {% block main %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">课程表</h1>
+</div>
 <div style="display: flex">
-    <img src="{{ student.avatar.url }}" class="img-thumbnail">
+    <img src="{{ user.avatar.url }}" class="img-thumbnail">
     <form style="margin-left: 5rem;margin-top: 5rem">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="name">姓名</span>
             </div>
-            <input type="text" class="form-control"  value="{{ student.stu_name }}" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            <input type="text" class="form-control"  value="{{ user.stu_name }}" aria-label="Default" aria-describedby="inputGroup-sizing-default">
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="gender">性别</span>
             </div>
-            <input type="text" class="form-control"  value="{{ student.stu_gender }}" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            <input type="text" class="form-control"  value="{{ user.stu_gender }}" aria-label="Default" aria-describedby="inputGroup-sizing-default">
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="code">密码</span>
             </div>
-            <input type="text" class="form-control"  value="{{ student.stu_password }}" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            <input type="text" class="form-control"  value="{{ user.stu_password }}" aria-label="Default" aria-describedby="inputGroup-sizing-default">
         </div>
         <button type="submit" class="btn btn-outline-success float-right">保存修改</button>
     </form>
@@ -66,10 +73,10 @@
         </thead>
         <tbody>
         <tr>
-            <td>{{ student.stu_ID }}</td>
-            <td>{{ student.stu_grade }}</td>
-            <td>{{ student.major_ID }}</td>
-            <td>{{ student.tot_cred }}</td>
+            <td>{{ user.stu_ID }}</td>
+            <td>{{ user.stu_grade }}</td>
+            <td>{{ user.major_ID }}</td>
+            <td>{{ user.tot_cred }}</td>
         </tr>
         </tbody>
     </table>

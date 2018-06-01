@@ -1,0 +1,149 @@
+{% extends 'Home.html' %}
+{% load static %}
+
+{% block personal %}
+<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{% url 'infoSystem:personal' user.stu_ID %}">{{ user.stu_name}}</a>
+{% endblock %}
+
+{% block title %}
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            {% for tab in tabs %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ tab.href }}">
+                    <span data-feather="{{ tab.icon }}"></span>
+                    {{ tab.name }}
+                </a>
+            </li>
+            {% endfor %}
+            <div class="dropdown-divider"></div>
+            {% for fun in functions %}
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>{{ fun.name }}</span>
+                <a class="d-flex align-items-center text-muted" href="#">
+                    <span data-feather="chevron-right"></span>
+                </a>
+            </h6>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+{% block main %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">所有学生信息</h1>
+</div>
+<table class="table table-bordered text-center">
+    <thead>
+    <tr style="background-color: rgba(21,212,45,.1)">
+        <th scope="col" style="width: 10%">stu_ID</th>
+        <th scope="col" style="width: 10%">stu_name</th>
+        <th scope="col" style="width: 10%">stu_grade</th>
+        <th scope="col" style="width: 10%">stu_gender</th>
+        <th scope="col" style="width: 10%">major_ID</th>
+        <th scope="col" style="width: 10%">stu_password</th>
+        <th scope="col" style="width: 10%">tot_cred</th>
+        <th scope="col" style="width: 10%">modify</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for stu in students %}
+    <tr>
+        <th scope="row">{{ stu.stu_ID }}</th>
+        <th scope="col">{{ stu.stu_name }}</th>
+        <th scope="col">{{ stu.stu_grade }}</th>
+        <th scope="col">{{ stu.stu_gender }}</th>
+        <th scope="col">{{ stu.major_ID }}</th>
+        <th scope="col">{{ stu.stu_password }}</th>
+        <th scope="col">{{ stu.tot_cred }}</th>
+        <th scope="col">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                    data-id="{{ stu.stu_ID }}" data-name="{{ stu.stu_name }}" data-grade="{{ stu.stu_grade }}"
+                    data-gender="{{ stu.stu_gender }}" data-major="{{ stu.major_ID }}">
+                修改
+            </button>
+        </th>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="">修改学生信息</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'infoSystem:update_stu' %}" method="post">
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">学号</span>
+                        </div>
+                        <input type="text" class="form-control id" name="id" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">姓名</span>
+                        </div>
+                        <input type="text" class="form-control name" name="name" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">性别</span>
+                        </div>
+                        <input type="text" class="form-control gender" name="gender" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">年级</span>
+                        </div>
+                        <input type="text" class="form-control grade" name="grade" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">专业</span>
+                        </div>
+                        <input type="text" class="form-control major" name="major" value="{{ stu.major_ID }}" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var id = button.data('id') // Extract info from data-* attributes
+            var name = button.data('name') // Extract info from data-* attributes
+            var gender = button.data('gender') // Extract info from data-* attributes
+            var grade = button.data('grade') // Extract info from data-* attributes
+            var major = button.data('major') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.id').val(id)
+            modal.find('.name').val(name)
+            modal.find('.gender').val(gender)
+            modal.find('.grade').val(grade)
+            modal.find('.major').val(major)
+        });
+    });
+</script>
+{% endblock %}

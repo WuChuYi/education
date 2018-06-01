@@ -1,0 +1,204 @@
+{% extends 'Home.html' %}
+{% load static %}
+
+{% block personal %}
+<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{% url 'infoSystem:personal' user.stu_ID %}">{{ user.stu_name}}</a>
+{% endblock %}
+
+{% block title %}
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            {% for tab in tabs %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ tab.href }}">
+                    <span data-feather="{{ tab.icon }}"></span>
+                    {{ tab.name }}
+                </a>
+            </li>
+            {% endfor %}
+            <div class="dropdown-divider"></div>
+            {% for fun in functions %}
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>{{ fun.name }}</span>
+                <a class="d-flex align-items-center text-muted" href="#">
+                    <span data-feather="chevron-right"></span>
+                </a>
+            </h6>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+{% block main %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">所有课程信息</h1>
+</div>
+<table class="table table-bordered text-center">
+    <thead>
+    <tr style="background-color: rgba(21,212,45,.1)">
+        <th scope="col">course_ID</th>
+        <th scope="col">title</th>
+        <th scope="col" >dept_id</th>
+        <th scope="col" >credits</th>
+        <th scope="col" >course_capacity</th>
+        <th scope="col" >type</th>
+        <th scope="col" >need_computer</th>
+        <th scope="col" >period</th>
+        <th scope="col">exam_method</th>
+        <th scope="col" >description</th>
+        <th scope="col" >modify</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for cour in course %}
+    <tr>
+        <th scope="row">{{ cour.course_ID }}</th>
+        <th scope="col">{{ cour.title }}</th>
+        <th scope="col">{{ cour.dept_id }}</th>
+        <th scope="col">{{ cour.credits }}</th>
+        <th scope="row">{{ cour.course_capacity }}</th>
+        <th scope="col">{{ cour.type }}</th>
+        <th scope="col">{{ cour.need_computer }}</th>
+        <th scope="col">{{ cour.period }}</th>
+        <th scope="row">{{ cour.exam_method }}</th>
+        <th scope="col">{{ cour.description }}</th>
+        <th scope="col">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                    data-id="{{ cour.course_ID }}" data-title="{{ cour.title }}" data-department="{{ cour.dept_id }}"
+                    data-credit="{{ cour.credits }}" data-capacity="{{ cour.course_capacity }}" data-type="{{ cour.type }}"
+                    data-need="{{ cour.need_computer }}" data-period="{{ cour.period }}"
+                    data-exam="{{ cour.exam_method }}"
+                    data-describe="{{ cour.description }}">
+                修改
+            </button>
+        </th>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="">修改学生信息</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'infoSystem:update_cour' %}" method="post">
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">课号</span>
+                        </div>
+                        <input type="text" class="form-control id" name="id" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">名称</span>
+                        </div>
+                        <input type="text" class="form-control title" name="title" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">部门</span>
+                        </div>
+                        <input type="text" class="form-control department" name="department" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">学分</span>
+                        </div>
+                        <input type="text" class="form-control credit" name="credit" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">容量</span>
+                        </div>
+                        <input type="text" class="form-control capacity" name="capacity" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">类型</span>
+                        </div>
+                        <input type="text" class="form-control type" name="type" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">电脑</span>
+                        </div>
+                        <input type="text" class="form-control need" name="need" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">课时</span>
+                        </div>
+                        <input type="text" class="form-control period" name="period" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">考试</span>
+                        </div>
+                        <input type="text" class="form-control exam" name="exam" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">描述</span>
+                        </div>
+                        <input type="text" class="form-control describe" name="describe" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var id = button.data('id') // Extract info from data-* attributes
+            var title = button.data('title') // Extract info from data-* attributes
+            var credit = button.data('credit') // Extract info from data-* attributes
+            var department = button.data('department') // Extract info from data-* attributes
+            var capacity = button.data('capacity') // Extract info from data-* attributes
+            var type = button.data('type') // Extract info from data-* attributes
+            var need = button.data('need') // Extract info from data-* attributes
+            var period = button.data('period') // Extract info from data-* attributes
+            var exam = button.data('exam') // Extract info from data-* attributes
+            var describe = button.data('describe') // Extract info from data-* attributes
+            console.log(department)
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.id').val(id)
+            modal.find('.title').val(title)
+            modal.find('.credit').val(credit)
+            modal.find('.department').val(department)
+            modal.find('.type').val(type)
+            modal.find('.need').val(need)
+            modal.find('.period').val(period)
+            modal.find('.exam').val(exam)
+            modal.find('.describe').val(describe)
+            modal.find('.capacity').val(capacity)
+        });
+    });
+</script>
+{% endblock %}

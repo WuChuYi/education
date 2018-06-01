@@ -3,9 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Student
 # Create your views here.
 
-<<<<<<< HEAD
 def login(request):
-    if request.method!='POST'：
+    if request.method!='POST':
         return render(request,'login.html',{})
     if type=='STUDENT':
         try:
@@ -13,16 +12,12 @@ def login(request):
             render(request,'login.html',{'error':{'msg':'好嘛'}})
         except:
             render(request,'login.html',{'error':{'msg':'妈耶'}})
-    else if type=='TEACHER':
-        try:
+    elif type=='TEACHER':
             user=Student.objects.get(ins_ID=request.POST['name'])
-    else if type=='EDUCATION MANAGER':
-        try:
+    elif type=='EDUCATION MANAGER':
             user=Student.objects.get(Mana_ID=request.POST['name'])
-    else if type=='SYSTEM MANAGER':
-        try:
+    elif type=='SYSTEM MANAGER':
             user=Student.objects.get(sys_ID=request.POST['name'])
-=======
 @csrf_exempt
 def login(request):
     if request.method!='POST':
@@ -151,5 +146,5 @@ def personal(request):
                 }],
     'student': Student.objects.get(stu_ID='3150102540')
     })
->>>>>>> 6e78c82e57f90c4fb900ec12cbe676658c6948f5
+
 

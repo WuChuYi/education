@@ -48,8 +48,3 @@ class Ins_course(models.Model):
     Ins_ID = models.ForeignKey('Instructor', on_delete=models.SET_NULL, null=True)
     Course_ID = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
 
-class Blacklist(models.Model):
-    User_ID = models.CharField(max_length=20, default=None, primary_key=True)
-    Error_time = models.IntegerField()
-    Lock_out = models.DateTimeField(default=datetime.now().replace(tzinfo=utc))
-
